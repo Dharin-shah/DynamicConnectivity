@@ -16,10 +16,12 @@ public class WeightedQuickUnion implements DynamicConnect {
 	}
 	
 	private int root(int p){
+		timer.init();
 		while(p != id[p]){
-			id[p] = id[id[p]]; //path compression
+			id[p] = id[id[p]]; //path compression - add to its tree's root
 			p = id[p];
 		}
+		timer.elapsedTime();
 		return p;
 	}
 	
@@ -33,11 +35,12 @@ public class WeightedQuickUnion implements DynamicConnect {
 	
 	@Override
 	public void union(int p, int q) {
-		// TODO Auto-generated method stub
+		timer.init();
 		int i = root(p);
 		int j = root(q);
 		if(sz[i] < sz[j]) {id[i] = j; sz[j] += sz[i];}
 		else {id[j] = i; sz[i] += sz[j];}
+		timer.elapsedTime();
 	}
 
 }
